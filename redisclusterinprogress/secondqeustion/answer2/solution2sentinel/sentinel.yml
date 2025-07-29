@@ -1,0 +1,12 @@
+version: '3'
+services:
+  redis-sentinel:
+    image: redis:7.4.2-alpine3.21
+    container_name: redis-sentinel
+    ports:
+      - "26379:26379"
+    command: >
+      redis-sentinel /etc/redis/sentinel.conf
+    volumes:
+      - ./sentinel.conf:/etc/redis/sentinel.conf
+

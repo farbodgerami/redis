@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  redis-7003:
+    image: docker.arvancloud.ir/redis:7.4.2-alpine3.21
+    container_name: redis-7003
+    ports:
+      - "7003:6379"
+      - "17003:16379"
+    command: redis-server --port 6379 --cluster-enabled yes --cluster-config-file nodes.conf --cluster-node-timeout 5000 --appendonly yes --cluster-announce-ip 192.168.173.109 --cluster-announce-port 7003 --cluster-announce-bus-port 17003
+    volumes:
+      - ./data/7003:/data
+
+  redis-7004:
+    image: docker.arvancloud.ir/redis:7.4.2-alpine3.21
+    container_name: redis-7004
+    ports:
+      - "7004:6379"
+      - "17004:16379"
+    command: redis-server --port 6379 --cluster-enabled yes --cluster-config-file nodes.conf --cluster-node-timeout 5000 --appendonly yes --cluster-announce-ip 192.168.173.109 --cluster-announce-port 7004 --cluster-announce-bus-port 17004
+    volumes:
+      - ./data/7004:/data
+
+  redis-7005:
+    image: docker.arvancloud.ir/redis:7.4.2-alpine3.21
+    container_name: redis-7005
+    ports:
+      - "7005:6379"
+      - "17005:16379"
+    command: redis-server --port 6379 --cluster-enabled yes --cluster-config-file nodes.conf --cluster-node-timeout 5000 --appendonly yes --cluster-announce-ip 192.168.173.109 --cluster-announce-port 7005 --cluster-announce-bus-port 17005
+    volumes:
+      - ./data/7005:/data

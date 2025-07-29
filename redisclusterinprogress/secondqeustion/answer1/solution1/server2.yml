@@ -1,0 +1,38 @@
+version: '3.9'
+services:
+  redis1:
+    image: redis:7.4.2-alpine3.21
+    container_name: redis1
+    ports:
+      - "7004:7004"
+    volumes:
+      - ./data1:/data
+    command: ["redis-server", "--port", "7004", "--cluster-enabled", "yes", "--cluster-config-file", "nodes.conf", "--cluster-node-timeout", "5000", "--appendonly", "yes"]
+    networks:
+      - app_net
+
+  redis2:
+    image: redis:7.4.2-alpine3.21
+    container_name: redis2
+    ports:
+      - "7005:7005"
+    volumes:
+      - ./data2:/data
+    command: ["redis-server", "--port", "7005", "--cluster-enabled", "yes", "--cluster-config-file", "nodes.conf", "--cluster-node-timeout", "5000", "--appendonly", "yes"]
+    networks:
+      - app_net
+
+  redis3:
+    image: redis:7.4.2-alpine3.21
+    container_name: redis3
+    ports:
+      - "7006:7006"
+    volumes:
+      - ./data3:/data
+    command: ["redis-server", "--port", "7006", "--cluster-enabled", "yes", "--cluster-config-file", "nodes.conf", "--cluster-node-timeout", "5000", "--appendonly", "yes"]
+    networks:
+      - app_net
+
+networks:
+  app_net:
+    driver: bridge
